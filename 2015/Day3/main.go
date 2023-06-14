@@ -20,10 +20,12 @@ type CurrentPosition struct {
 }
 
 func main() {
-	// TODO: My initial thoughts on this are to make a map with the (x,y) coordinates as keys
-	// and to get the length of the map at the end to see how many houses were delivered to
 	RunTestCases()
 	fmt.Println(RunPuzzleCase())
+	fmt.Println(RunPuzzle2TestCaseX(1))
+	fmt.Println(RunPuzzle2TestCaseX(2))
+	fmt.Println(RunPuzzle2TestCaseX(3))
+	fmt.Println(RunPuzzle2())
 }
 
 func NewCurrentPosition() *CurrentPosition {
@@ -113,5 +115,66 @@ func RunPuzzleCase() int {
 		DeliverPresent(*currentPosition, deliveryMap)
 	}
 
+	return GetNumberOfHousesDeliveredTo(deliveryMap)
+}
+
+func GetAnswerForPuzzleXTestY(puzzleNumber, testNumber int) int {
+	resultFile, err := os.ReadFile(fmt.Sprintf("./puzzle%d_answers.text", puzzleNumber))
+	check(err)
+	resultsStringSlice := strings.Split(string(resultFile), "\n")
+	answer, err := strconv.Atoi(resultsStringSlice[testNumber-1])
+	check(err)
+	return answer
+}
+
+func RunPuzzle2TestCaseX(testNumber int) bool {
+	input, err := os.ReadFile(fmt.Sprintf("./puzzle2_test%d.text", testNumber))
+	check(err)
+
+	currentRealPosition := NewCurrentPosition()
+	currentRoboPosition := NewCurrentPosition()
+
+	deliveryMap := make(map[string]int)
+
+	DeliverPresent(*currentRealPosition, deliveryMap)
+	DeliverPresent(*currentRoboPosition, deliveryMap)
+
+	for index, direction := range string(input) {
+		deltaX, deltaY, err := GetDelta(string(direction))
+		check(err)
+		if index%2 == 0 {
+			currentRealPosition.MovePosition(deltaX, deltaY)
+			DeliverPresent(*currentRealPosition, deliveryMap)
+		} else {
+			currentRoboPosition.MovePosition(deltaX, deltaY)
+			DeliverPresent(*currentRoboPosition, deliveryMap)
+		}
+	}
+	return GetNumberOfHousesDeliveredTo(deliveryMap) == GetAnswerForPuzzleXTestY(2, testNumber)
+}
+
+func RunPuzzle2() int {
+	input, err := os.ReadFile("./puzzle2.text")
+	check(err)
+
+	currentRealPosition := NewCurrentPosition()
+	currentRoboPosition := NewCurrentPosition()
+
+	deliveryMap := make(map[string]int)
+
+	DeliverPresent(*currentRealPosition, deliveryMap)
+	DeliverPresent(*currentRoboPosition, deliveryMap)
+
+	for index, direction := range string(input) {
+		deltaX, deltaY, err := GetDelta(string(direction))
+		check(err)
+		if index%2 == 0 {
+			currentRealPosition.MovePosition(deltaX, deltaY)
+			DeliverPresent(*currentRealPosition, deliveryMap)
+		} else {
+			currentRoboPosition.MovePosition(deltaX, deltaY)
+			DeliverPresent(*currentRoboPosition, deliveryMap)
+		}
+	}
 	return GetNumberOfHousesDeliveredTo(deliveryMap)
 }
