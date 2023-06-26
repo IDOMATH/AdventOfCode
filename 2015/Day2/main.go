@@ -104,7 +104,7 @@ func RunPuzzleOneTestSum() {
 	result, err := strconv.Atoi(string(resultFile))
 	check(err)
 
-	inputFile, err := os.ReadFile("./puzzle1_tests.text")
+	inputFile, err := os.ReadFile("./puzzle1_tests.txt.text")
 	check(err)
 	inputRows := strings.Split(string(inputFile), "\n")
 	var inputs [2][3]int
