@@ -23,3 +23,9 @@ func GetLines(file string) []string {
 	stringSlice := strings.Split(file, "\n")
 	return stringSlice
 }
+
+func GetNumberOfFirstCharacters(line string, numberOfCharacters int) []rune {
+	firstChars := []rune(line[:numberOfCharacters])
+
+	return firstChars
+}
