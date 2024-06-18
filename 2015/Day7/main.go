@@ -65,13 +65,21 @@ func StrToInt(input string) uint16 {
 	return uint16(num)
 }
 
-func AndOperator(x, y string) {
-	var xi uint16
+func AndOperator(x, y string) uint16 {
+	var xi, yi uint16
 	i, err := strconv.Atoi(x)
 	if err != nil {
 		xi = outputs[x]
 	}
 	xi = uint16(i)
+
+	i, err = strconv.Atoi(y)
+	if err != nil {
+		yi = outputs[y]
+	}
+	yi = uint16(i)
+
+	return xi & yi
 }
 
 func NotOperator(num uint16) uint16 {
