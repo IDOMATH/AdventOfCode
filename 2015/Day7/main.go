@@ -82,6 +82,23 @@ func AndOperator(x, y string) uint16 {
 	return xi & yi
 }
 
+func OrOperator(x, y string) uint16 {
+	var xi, yi uint16
+	i, err := strconv.Atoi(x)
+	if err != nil {
+		xi = outputs[x]
+	}
+	xi = uint16(i)
+
+	i, err = strconv.Atoi(y)
+	if err != nil {
+		yi = outputs[y]
+	}
+	yi = uint16(i)
+
+	return xi ^ yi
+}
+
 func NotOperator(num uint16) uint16 {
 	return num ^ maxUint16
 }
