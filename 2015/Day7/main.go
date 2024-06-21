@@ -46,7 +46,7 @@ func ParseInput(input string, outs map[string]uint16) (value uint16) {
 		case "AND":
 			return AndOperator(terms[0], terms[2])
 		case "OR":
-			return OrOperator(outs[terms[0]], outs[terms[2]])
+			return OrOperator(terms[0], terms[2])
 		case "LSHIFT":
 			return outs[terms[0]] << StrToInt(terms[2])
 		case "RSHIFT":
