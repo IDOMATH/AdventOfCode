@@ -70,14 +70,16 @@ func AndOperator(x, y string) uint16 {
 	i, err := strconv.Atoi(x)
 	if err != nil {
 		xi = outputs[x]
+	} else {
+		xi = uint16(i)
 	}
-	xi = uint16(i)
 
 	i, err = strconv.Atoi(y)
 	if err != nil {
 		yi = outputs[y]
+	} else {
+		yi = uint16(i)
 	}
-	yi = uint16(i)
 
 	return xi & yi
 }
@@ -87,14 +89,16 @@ func OrOperator(x, y string) uint16 {
 	i, err := strconv.Atoi(x)
 	if err != nil {
 		xi = outputs[x]
+	} else {
+		xi = uint16(i)
 	}
-	xi = uint16(i)
 
 	i, err = strconv.Atoi(y)
 	if err != nil {
 		yi = outputs[y]
+	} else {
+		yi = uint16(i)
 	}
-	yi = uint16(i)
 
 	return xi ^ yi
 }
