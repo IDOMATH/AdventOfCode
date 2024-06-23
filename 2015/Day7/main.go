@@ -31,7 +31,9 @@ func main() {
 		// fmt.Println("line: ", line)
 		input, output := SplitInputAndOutput(line)
 		// fmt.Println("input: ", ParseInput(input), " output: ", output)
-		outputs[output] = ParseInput(input)
+		var wire Wire
+		wire.Value = ParseInput(input)
+		outputs[output] = wire
 	}
 
 	for key, output := range outputs {
@@ -59,9 +61,9 @@ func ParseInput(input string) (value uint16) {
 		case "OR":
 			return OrOperator(terms[0], terms[2])
 		case "LSHIFT":
-			return outputs[terms[0]] << StrToInt(terms[2])
+			return outputs[terms[0]].Value << StrToInt(terms[2])
 		case "RSHIFT":
-			return outputs[terms[0]] >> StrToInt(terms[2])
+			return outputs[terms[0]].Value >> StrToInt(terms[2])
 		}
 	}
 
@@ -71,7 +73,7 @@ func ParseInput(input string) (value uint16) {
 func StrToInt(input string) uint16 {
 	num, err := strconv.Atoi(input)
 	if err != nil {
-		return outputs[input]
+		return outputs[input].Value
 	}
 	return uint16(num)
 }
@@ -80,14 +82,14 @@ func AndOperator(x, y string) uint16 {
 	var xi, yi uint16
 	i, err := strconv.Atoi(x)
 	if err != nil {
-		xi = outputs[x]
+		xi = outputs[x].Value
 	} else {
 		xi = uint16(i)
 	}
 
 	i, err = strconv.Atoi(y)
 	if err != nil {
-		yi = outputs[y]
+		yi = outputs[y].Value
 	} else {
 		yi = uint16(i)
 	}
@@ -99,14 +101,14 @@ func OrOperator(x, y string) uint16 {
 	var xi, yi uint16
 	i, err := strconv.Atoi(x)
 	if err != nil {
-		xi = outputs[x]
+		xi = outputs[x].Value
 	} else {
 		xi = uint16(i)
 	}
 
 	i, err = strconv.Atoi(y)
 	if err != nil {
-		yi = outputs[y]
+		yi = outputs[y].Value
 	} else {
 		yi = uint16(i)
 	}
