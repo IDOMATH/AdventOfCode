@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/idomath/AdventOfCode/util"
 )
@@ -9,6 +10,14 @@ import (
 func main() {
 	runLogic("./test.txt")
 	runLogic("./input01.txt")
+}
+
+func transcribeNumber(str string) int {
+	var zeroIdx, oneIdx, twoIdx, threeIdx, fourIdx, fiveIdx, sixIdx, sevenIdx, eightIdx, nineIdx, curIdx int
+	curIdx = strings.Index(str, "zero")
+	if curIdx != -1 {
+		zeroIdx = curIdx
+	}
 }
 
 func runLogic(filepath string) {
