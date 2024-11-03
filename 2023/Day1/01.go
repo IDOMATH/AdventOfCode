@@ -13,47 +13,44 @@ func main() {
 }
 
 func transcribeFirstNumber(str string) int {
-	var zeroIdx, oneIdx, twoIdx, threeIdx, fourIdx, fiveIdx, sixIdx, sevenIdx, eightIdx, nineIdx, curIdx int
-	curIdx = strings.Index(str, "zero")
-	if curIdx != -1 {
-		zeroIdx = curIdx
-	}
+	var indexes [10]int
+	curIdx := strings.Index(str, "zero")
+	indexes[0] = curIdx
+
 	curIdx = strings.Index(str, "one")
-	if curIdx != -1 {
-		oneIdx = curIdx
-	}
+	indexes[1] = curIdx
+
 	curIdx = strings.Index(str, "two")
-	if curIdx != -1 {
-		twoIdx = curIdx
-	}
+	indexes[2] = curIdx
+
 	curIdx = strings.Index(str, "three")
-	if curIdx != -1 {
-		threeIdx = curIdx
-	}
+	indexes[3] = curIdx
+
 	curIdx = strings.Index(str, "four")
-	if curIdx != -1 {
-		fourIdx = curIdx
-	}
+	indexes[4] = curIdx
+
 	curIdx = strings.Index(str, "five")
-	if curIdx != -1 {
-		fiveIdx = curIdx
-	}
+	indexes[5] = curIdx
+
 	curIdx = strings.Index(str, "six")
-	if curIdx != -1 {
-		sixIdx = curIdx
-	}
+	indexes[6] = curIdx
+
 	curIdx = strings.Index(str, "seven")
-	if curIdx != -1 {
-		sevenIdx = curIdx
-	}
+	indexes[7] = curIdx
+
 	curIdx = strings.Index(str, "eight")
-	if curIdx != -1 {
-		eightIdx = curIdx
-	}
+	indexes[8] = curIdx
+
 	curIdx = strings.Index(str, "nine")
-	if curIdx != -1 {
-		nineIdx = curIdx
+	indexes[9] = curIdx
+
+	min := 1024
+	for _, idx := range indexes {
+		if idx != -1 && idx < min {
+			min = idx
+		}
 	}
+	return min
 }
 
 func runLogic(filepath string) {
