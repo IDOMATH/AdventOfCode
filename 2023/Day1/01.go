@@ -53,6 +53,47 @@ func transcribeFirstNumber(str string) int {
 	return min
 }
 
+func transcribeLastNumber(str string) int {
+	var indexes [10]int
+	curIdx := strings.LastIndex(str, "zero")
+	indexes[0] = curIdx
+
+	curIdx = strings.LastIndex(str, "one")
+	indexes[1] = curIdx
+
+	curIdx = strings.LastIndex(str, "two")
+	indexes[2] = curIdx
+
+	curIdx = strings.LastIndex(str, "three")
+	indexes[3] = curIdx
+
+	curIdx = strings.LastIndex(str, "four")
+	indexes[4] = curIdx
+
+	curIdx = strings.LastIndex(str, "five")
+	indexes[5] = curIdx
+
+	curIdx = strings.LastIndex(str, "six")
+	indexes[6] = curIdx
+
+	curIdx = strings.LastIndex(str, "seven")
+	indexes[7] = curIdx
+
+	curIdx = strings.LastIndex(str, "eight")
+	indexes[8] = curIdx
+
+	curIdx = strings.LastIndex(str, "nine")
+	indexes[9] = curIdx
+
+	max := 0
+	for _, idx := range indexes {
+		if idx != -1 && idx > max {
+			max = idx
+		}
+	}
+	return max
+}
+
 func runLogic(filepath string) {
 	file, err := util.GetFile(filepath)
 	if err != nil {
