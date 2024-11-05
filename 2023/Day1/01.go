@@ -45,12 +45,14 @@ func transcribeFirstNumber(str string) int {
 	indexes[9] = curIdx
 
 	min := 1024
-	for _, idx := range indexes {
+	val := -1
+	for i, idx := range indexes {
 		if idx != -1 && idx < min {
 			min = idx
+			val = i
 		}
 	}
-	return min
+	return val
 }
 
 func transcribeLastNumber(str string) int {
@@ -86,12 +88,14 @@ func transcribeLastNumber(str string) int {
 	indexes[9] = curIdx
 
 	max := 0
-	for _, idx := range indexes {
+	val := -1
+	for i, idx := range indexes {
 		if idx != -1 && idx > max {
 			max = idx
+			val = i
 		}
 	}
-	return max
+	return val
 }
 
 func runLogic(filepath string) {
