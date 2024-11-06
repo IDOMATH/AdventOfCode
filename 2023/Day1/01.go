@@ -8,11 +8,12 @@ import (
 )
 
 func main() {
-	runLogic("./test.txt")
-	runLogic("./input01.txt")
+	// runLogic("./test.txt")
+	// runLogic("./input01.txt")
+	run2Logic("./test2.txt")
 }
 
-func transcribeFirstNumber(str string) int {
+func transcribeFirstNumber(str string) (int, int) {
 	var indexes [10]int
 	curIdx := strings.Index(str, "zero")
 	indexes[0] = curIdx
@@ -52,10 +53,10 @@ func transcribeFirstNumber(str string) int {
 			val = i
 		}
 	}
-	return val
+	return min, val
 }
 
-func transcribeLastNumber(str string) int {
+func transcribeLastNumber(str string) (int, int) {
 	var indexes [10]int
 	curIdx := strings.LastIndex(str, "zero")
 	indexes[0] = curIdx
@@ -95,7 +96,20 @@ func transcribeLastNumber(str string) int {
 			val = i
 		}
 	}
-	return val
+	return max, val
+}
+
+func run2Logic(filepath string) {
+	file, err := util.GetFile(filepath)
+	if err != nil {
+		panic("error getting file")
+	}
+	lines := util.GetLines(file)
+
+	for _, line := range lines {
+		fmt.Println(transcribeFirstNumber(line))
+		fmt.Println(transcribeLastNumber(line))
+	}
 }
 
 func runLogic(filepath string) {
