@@ -2,15 +2,22 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/idomath/AdventOfCode/util"
 )
 
+type IndexNumber struct {
+	Index  int
+	Number int
+}
+
 func main() {
 	// runLogic("./test.txt")
 	// runLogic("./input01.txt")
 	run2Logic("./test2.txt")
+	run2Logic("./input01.txt")
 }
 
 func transcribeFirstNumber(str string) (int, int) {
@@ -106,10 +113,38 @@ func run2Logic(filepath string) {
 	}
 	lines := util.GetLines(file)
 
-	for _, line := range lines {
-		fmt.Println(transcribeFirstNumber(line))
-		fmt.Println(transcribeLastNumber(line))
+	sum := 0
+	for lineNum, line := range lines {
+		var numbersInLine []IndexNumber
+		i, x := transcribeFirstNumber(line)
+		numbersInLine = append(numbersInLine, IndexNumber{Index: i, Number: x})
+		i, x = transcribeLastNumber(line)
+		numbersInLine = append(numbersInLine, IndexNumber{Index: i, Number: x})
+		for idx, char := range line {
+			num := int(char - '0')
+			if num > 9 || num < 0 {
+				continue
+			}
+			numbersInLine = append(numbersInLine, IndexNumber{Index: idx, Number: num})
+		}
+		lowestIndex := 1024
+		leftNumber := -1
+		highestIndex := 0
+		rightNumber := -1
+		for _, nums := range numbersInLine {
+			if nums.Index < lowestIndex {
+				lowestIndex = nums.Index
+				leftNumber = nums.Number
+			}
+			if nums.Index > highestIndex {
+				highestIndex = nums.Index
+				rightNumber = nums.Number
+			}
+		}
+		sum += (leftNumber * 10) + rightNumber
+		fmt.Println(strconv.Itoa(lineNum+1) + " lineVal: " + strconv.Itoa((leftNumber*10)+rightNumber) + ": " + strconv.Itoa(sum))
 	}
+	fmt.Println(sum)
 }
 
 func runLogic(filepath string) {
