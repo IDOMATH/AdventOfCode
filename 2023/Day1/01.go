@@ -132,11 +132,11 @@ func run2Logic(filepath string) {
 		highestIndex := 0
 		rightNumber := -1
 		for _, nums := range numbersInLine {
-			if nums.Index < lowestIndex {
+			if nums.Index < lowestIndex && nums.Number != -1 {
 				lowestIndex = nums.Index
 				leftNumber = nums.Number
 			}
-			if nums.Index > highestIndex {
+			if nums.Index > highestIndex && nums.Number != -1 {
 				highestIndex = nums.Index
 				rightNumber = nums.Number
 			}
