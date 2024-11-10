@@ -16,7 +16,8 @@ type IndexNumber struct {
 func main() {
 	// runLogic("./test.txt")
 	// runLogic("./input01.txt")
-	run2Logic("./test2.txt")
+	// run2Logic("./test0.txt")
+	// run2Logic("./test2.txt")
 	run2Logic("./input01.txt")
 }
 
@@ -114,10 +115,6 @@ func run2Logic(filepath string) {
 	lines := util.GetLines(file)
 
 	sum := 0
-	lowestIndex := 1024
-	leftNumber := -1
-	highestIndex := 0
-	rightNumber := -1
 	for lineNum, line := range lines {
 		var numbersInLine []IndexNumber
 		i, x := transcribeFirstNumber(line)
@@ -130,8 +127,11 @@ func run2Logic(filepath string) {
 				continue
 			}
 			numbersInLine = append(numbersInLine, IndexNumber{Index: idx, Number: num})
-			leftNumber = num
 		}
+		lowestIndex := 1024
+		leftNumber := -1
+		highestIndex := -1
+		rightNumber := -1
 		for _, nums := range numbersInLine {
 			if nums.Index < lowestIndex && nums.Number != -1 {
 				lowestIndex = nums.Index
