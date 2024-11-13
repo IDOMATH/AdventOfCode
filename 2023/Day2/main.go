@@ -10,6 +10,7 @@ import (
 
 func main() {
 	fmt.Println("hello world")
+	logic("./test.txt")
 }
 
 func logic(filepath string) {
@@ -25,32 +26,36 @@ func logic(filepath string) {
 	for _, line := range lines {
 		groupAndGames := strings.Split(line, ":")
 		blankAndGroup := strings.Split(groupAndGames[0], " ")
-		groupNumber := blankAndGroup[1]
+		groupNumber, err := strconv.Atoi(blankAndGroup[1])
+		if err != nil {
+			panic("error getting game number")
+		}
 
 		games := strings.Split(groupAndGames[1], ";")
 		for _, game := range games {
+			legalGame := true
 			pieceMap := make(map[string]int)
 			draws := strings.Split(game, ",")
 			for _, draw := range draws {
 				colorVal := strings.Split(draw, " ")
-				for i := 1; i < len(colorVal); i += 2 {
-					numPieces, err := strconv.Atoi(colorVal[i+1])
+				for i := 0; i < len(colorVal); i += 2 {
+					numPieces, err := strconv.Atoi(colorVal[i])
 					if err != nil {
 						panic("error getting number of pieces" + err.Error())
 					}
-					pieceMap[colorVal[i]] = numPieces
+					pieceMap[colorVal[i+1]] = numPieces
 				}
-				if pieceMap["blue"] > bluePieces {
-					break
-				}
-				if pieceMap["green"] > greenPieces {
-					break
-				}
-				if pieceMap["red"] > redPieces {
+				if pieceMap["blue"] > bluePieces ||
+					pieceMap["green"] > greenPieces ||
+					pieceMap["red"] > redPieces {
+					legalGame = false
 					break
 				}
 			}
+			if legalGame {
+				sum += groupNumber
+			}
 		}
-		game1 := strings.TrimSpace(games[0])
 	}
+	fmt.Println(sum)
 }
