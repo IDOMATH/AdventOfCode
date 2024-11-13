@@ -40,6 +40,15 @@ func logic(filepath string) {
 					}
 					pieceMap[colorVal[i]] = numPieces
 				}
+				if pieceMap["blue"] > bluePieces {
+					break
+				}
+				if pieceMap["green"] > greenPieces {
+					break
+				}
+				if pieceMap["red"] > redPieces {
+					break
+				}
 			}
 		}
 		game1 := strings.TrimSpace(games[0])
