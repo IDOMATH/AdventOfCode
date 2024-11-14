@@ -31,14 +31,14 @@ func logic(filepath string) {
 			panic("error getting game number")
 		}
 
+		legalGame := true
 		games := strings.Split(groupAndGames[1], ";")
 		for _, game := range games {
-			legalGame := true
 			pieceMap := make(map[string]int)
 			draws := strings.Split(game, ",")
 			for _, draw := range draws {
 				colorVal := strings.Split(draw, " ")
-				for i := 0; i < len(colorVal); i += 2 {
+				for i := 1; i < len(colorVal); i += 2 {
 					numPieces, err := strconv.Atoi(colorVal[i])
 					if err != nil {
 						panic("error getting number of pieces" + err.Error())
@@ -52,9 +52,9 @@ func logic(filepath string) {
 					break
 				}
 			}
-			if legalGame {
-				sum += groupNumber
-			}
+		}
+		if legalGame {
+			sum += groupNumber
 		}
 	}
 	fmt.Println(sum)
