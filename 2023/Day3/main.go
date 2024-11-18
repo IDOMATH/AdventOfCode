@@ -19,4 +19,14 @@ func logic(filepath string) {
 	lines := util.GetLines(file)
 
 	var grid [][]rune
+
+	for i, line := range lines {
+		var gridRow []rune
+		for _, char := range line {
+			gridRow = append(gridRow, char)
+			grid[i] = append(grid[i], char)
+
+		}
+		grid = append(grid, gridRow)
+	}
 }
