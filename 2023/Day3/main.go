@@ -6,6 +6,11 @@ import (
 	"github.com/idomath/AdventOfCode/util"
 )
 
+type Location struct {
+	Row    int
+	Column int
+}
+
 func main() {
 	fmt.Println("Hello world")
 }
@@ -20,13 +25,28 @@ func logic(filepath string) {
 
 	var grid [][]rune
 
-	for i, line := range lines {
+	for _, line := range lines {
 		var gridRow []rune
 		for _, char := range line {
 			gridRow = append(gridRow, char)
-			grid[i] = append(grid[i], char)
 
 		}
 		grid = append(grid, gridRow)
+	}
+
+	// Get the locations of the symbols
+	var symbolLocations []Location
+	for iRow, row := range grid {
+		for iCol, col := range row {
+			colNum := int(col - '0')
+			if colNum < 0 {
+				continue
+			} else if colNum > 9 {
+				continue
+			}
+			if col != '.' {
+				symbolLocations = append(symbolLocations, Location{Row: iRow, Column: iCol})
+			}
+		}
 	}
 }
