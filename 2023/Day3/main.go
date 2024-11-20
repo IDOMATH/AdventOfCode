@@ -39,9 +39,7 @@ func logic(filepath string) {
 	for iRow, row := range grid {
 		for iCol, col := range row {
 			colNum := int(col - '0')
-			if colNum < 0 {
-				continue
-			} else if colNum > 9 {
+			if colNum >= 0 && colNum <= 9 {
 				continue
 			}
 			if col != '.' {
