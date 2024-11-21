@@ -47,4 +47,23 @@ func logic(filepath string) {
 			}
 		}
 	}
+
+	for _, loc := range symbolLocations {
+		if loc.Column-1 >= 0 && loc.Row-1 >= 0 {
+			entry := grid[loc.Row-1][loc.Column-1]
+			entryNum := int(entry - '0')
+			if entryNum >= 0 && entryNum <= 9 {
+
+			}
+		}
+		if loc.Column > len(grid[0]) {
+			continue
+		}
+		if loc.Row-1 < 0 {
+			continue
+		}
+		if loc.Row < len(grid) {
+			continue
+		}
+	}
 }
