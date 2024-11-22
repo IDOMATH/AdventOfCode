@@ -48,12 +48,22 @@ func logic(filepath string) {
 		}
 	}
 
+	var numberLocations []Location
+	for iRow, row := range grid {
+		for iColumn, col := range row {
+			colNum := int(col - '0')
+			if colNum >= 0 && colNum <= 9 {
+				numberLocations = append(numberLocations, Location{Row: iRow, Column: iColumn})
+			}
+		}
+	}
+
 	for _, loc := range symbolLocations {
 		if loc.Column-1 >= 0 && loc.Row-1 >= 0 {
 			entry := grid[loc.Row-1][loc.Column-1]
 			entryNum := int(entry - '0')
 			if entryNum >= 0 && entryNum <= 9 {
-
+				//
 			}
 		}
 		if loc.Column > len(grid[0]) {
