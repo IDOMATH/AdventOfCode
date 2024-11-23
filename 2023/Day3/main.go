@@ -11,6 +11,12 @@ type Location struct {
 	Column int
 }
 
+type NumberAtLocation struct {
+	Num   int
+	Start Location
+	End   Location
+}
+
 func main() {
 	fmt.Println("Hello world")
 }
@@ -56,6 +62,12 @@ func logic(filepath string) {
 				numberLocations = append(numberLocations, Location{Row: iRow, Column: iColumn})
 			}
 		}
+	}
+
+	var prevNumLoc Location
+	var curNum []int
+	for _, numLoc := range numberLocations {
+
 	}
 
 	for _, loc := range symbolLocations {
